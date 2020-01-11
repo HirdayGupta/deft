@@ -1,42 +1,75 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Stage, Layer, Text } from 'react-konva';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import { Stage, Layer, Rect, Text } from "react-konva";
+import Konva from "konva";
 
-class App extends Component {
-  state = {
-    isDragging: false,
-    x: 50,
-    y: 50
+export default class ColoredRect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { color: "red", rects: [] };
+  }
+
+  handleClick = () => {
+    this.setState({
+      color: "red"
+    });
   };
-
   render() {
     return (
-      <Stage width={window.innerWidth / 2} height={window.innerHeight / 2}>
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+        ref="stageReference"
+      >
         <Layer>
-          <Text
-            text="Sam"
-            x={this.state.x}
-            y={this.state.y}
-            draggable
-            fill={this.state.isDragging ? 'green' : 'black'}
-            onDragStart={() => {
+          <Rect
+            ref="draggableRectReference"
+            x={20}
+            y={20}
+            width={50}
+            height={50}
+            fill={this.state.color}
+            shadowBlur={5}
+            onClick={this.handleClick}
+            draggable={true}
+            onDragEnd={() => {
+              var draggableRect = this.refs.draggableRectReference;
+              /* adding a new rect in in state, no need to call draw() or anything
+              because updating state triggers render() again */
               this.setState({
-                isDragging: true
+                rects: [
+                  ...this.state.rects,
+                  {
+                    x: draggableRect.getStage().getPointerPosition().x,
+                    y: draggableRect.getStage().getPointerPosition().y,
+                    width: 50,
+                    height: 50,
+                    fill: "red",
+                    draggable: true
+                  }
+                ]
               });
-            }}
-            onDragEnd={e => {
-              this.setState({
-                isDragging: false,
-                x: e.target.x(),
-                y: e.target.y()
-              });
+              //returning draggable rect to original position
+              draggableRect.position({ x: 20, y: 20 });
+              this.refs.stageReference.draw(); // or draggableRect.getStage().draw()
             }}
           />
+        </Layer>
+        <Layer>
+          {this.state.rects.map(eachRect => {
+            return (
+              <Rect
+                x={eachRect.x}
+                y={eachRect.y}
+                width={eachRect.width}
+                height={eachRect.height}
+                fill={eachRect.fill}
+                draggable={eachRect.draggable}
+              />
+            );
+          })}
         </Layer>
       </Stage>
     );
   }
 }
-
-render(<App />, document.getElementById('root'));
-export default App;
