@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Stage, Layer, Rect, Text, Ellipse } from "react-konva";
 import Konva from "konva";
 import ToolBar from "./components/toolbar";
+import SideBar from "./components/sidebar";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,39 @@ export default class App extends React.Component {
       color: Konva.Util.getRandomColor()
     });
   };
+
+  addRect = (newX, newY) => {
+    this.setState({
+      rects: [
+        ...this.state.rects,
+        {
+          x: newX,
+          y: newY,
+          width: 30,
+          height: 30,
+          fill: this.state.color,
+          draggable: true
+        }
+      ]
+    });
+  }
+
+  addEllipse = (newX, newY) => {
+    this.setState({
+      ellipses: [
+        ...this.state.ellipses,
+        {
+          x: newX,
+          y: newY,
+          width: 30,
+          height: 30,
+          fill: this.state.color,
+          draggable: true
+        }
+      ]
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -24,81 +58,7 @@ export default class App extends React.Component {
         height={window.innerHeight}
         ref="stageReference"
       >
-        <Layer>
-          <Rect
-          x={0}
-          y={0}
-          width={50}
-          height={window.outerHeight}
-          stroke="black"
-          strokeWidth={1.5}
-          fill="black"
-          />
-          <Rect
-            ref="draggableRectReference"
-            x={10}
-            y={240}
-            width={30}
-            height={30}
-            fill={this.state.color}
-            shadowBlur={0}
-            onClick={this.handleClick}
-            draggable={true}
-            onDragEnd={() => {
-              var draggableRect = this.refs.draggableRectReference;
-              /* adding a new rect in in state, no need to call draw() or anything
-              because updating state triggers render() again */
-              this.setState({
-                rects: [
-                  ...this.state.rects,
-                  {
-                    x: draggableRect.getStage().getPointerPosition().x,
-                    y: draggableRect.getStage().getPointerPosition().y,
-                    width: 30,
-                    height: 30,
-                    fill: this.state.color,
-                    draggable: true
-                  }
-                ]
-              });
-              //returning draggable rect to original position
-              draggableRect.position({ x: 10, y: 240 });
-              this.refs.stageReference.draw(); // or draggableRect.getStage().draw()
-            }}
-          />
-          <Ellipse
-            ref="draggableEllipseReference"
-            x={25}
-            y={200}
-            width={30}
-            height={30}
-            fill={this.state.color}
-            shadowBlur={0}
-            onClick={this.handleClick}
-            draggable={true}
-            onDragEnd={() => {
-              var draggableEllipse = this.refs.draggableEllipseReference;
-              /* adding a new rect in in state, no need to call draw() or anything
-              because updating state triggers render() again */
-              this.setState({
-                ellipses: [
-                  ...this.state.ellipses,
-                  {
-                    x: draggableEllipse.getStage().getPointerPosition().x,
-                    y: draggableEllipse.getStage().getPointerPosition().y,
-                    width: 30,
-                    height: 30,
-                    fill: this.state.color,
-                    draggable: true
-                  }
-                ]
-              });
-              //returning draggable rect to original position
-              draggableEllipse.position({ x: 25, y: 200 });
-              this.refs.stageReference.draw(); // or draggableRect.getStage().draw()
-            }}
-          />
-        </Layer>
+        <SideBar color={this.state.color} addRect={this.addRect} addEllipse={this.addEllipse}></SideBar>
         <Layer>
           {this.state.rects.map(eachRect => {
             return (
