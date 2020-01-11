@@ -53,7 +53,7 @@ export default class App extends React.Component {
                     y: draggableRect.getStage().getPointerPosition().y,
                     width: 30,
                     height: 30,
-                    fill: "green",
+                    fill: this.state.color,
                     draggable: true
                   }
                 ]
@@ -85,7 +85,7 @@ export default class App extends React.Component {
                     y: draggableEllipse.getStage().getPointerPosition().y,
                     width: 30,
                     height: 30,
-                    fill: "green",
+                    fill: this.state.color,
                     draggable: true
                   }
                 ]
