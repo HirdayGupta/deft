@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { Stage, Layer, Rect, Text, Ellipse } from "react-konva";
 import Konva from "konva";
+import ToolBar from "./components/toolbar";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,8 @@ export default class App extends React.Component {
   };
   render() {
     return (
+      <React.Fragment>
+      <ToolBar></ToolBar>
       <Stage
         width={window.innerWidth}
         height={window.innerHeight}
@@ -123,6 +126,7 @@ export default class App extends React.Component {
           })}
         </Layer>
       </Stage>
+      </React.Fragment>
     );
   }
 }
