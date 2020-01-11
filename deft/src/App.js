@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Stage, Layer, Text } from 'react-konva';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    isDragging: false,
+    x: 50,
+    y: 50
+  };
+
+  render() {
+    return (
+      <Stage width={window.innerWidth / 2} height={window.innerHeight / 2}>
+        <Layer>
+          <Text
+            text="Sam"
+            x={this.state.x}
+            y={this.state.y}
+            draggable
+            fill={this.state.isDragging ? 'green' : 'black'}
+            onDragStart={() => {
+              this.setState({
+                isDragging: true
+              });
+            }}
+            onDragEnd={e => {
+              this.setState({
+                isDragging: false,
+                x: e.target.x(),
+                y: e.target.y()
+              });
+            }}
+          />
+        </Layer>
+      </Stage>
+    );
+  }
 }
 
+render(<App />, document.getElementById('root'));
 export default App;
