@@ -18,6 +18,10 @@ export default class RectElement extends React.Component {
     };
   }
 
+    componentDidMount() {
+        this.shapeRef.moveToTop();
+    }
+
   handleDragEnd = (e) => {
     this.setState({
       x: e.target.x(),
