@@ -160,8 +160,6 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas} changeColor={this.changeColor} editText={this.editText} changeFont={this.changeFont} changeFontSize={this.changeFontSize} changeBorderRadius={this.changeBorderRadius}></TopBar>
-        <ConstraintsEditor></ConstraintsEditor>
-        <Constraints></Constraints>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
@@ -236,6 +234,8 @@ export default class App extends React.Component {
           </TransformerComponent>
         </Layer>
       </Stage>
+      <Constraints></Constraints>
+      <ConstraintsEditor></ConstraintsEditor>
       </React.Fragment>
     );
   }

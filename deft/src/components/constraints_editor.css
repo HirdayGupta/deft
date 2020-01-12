@@ -1,9 +1,29 @@
 .constraints-editor {
-    background-color: #ffffff;
     height: 300px;
     width: 300px;
     position: absolute;
     right: 30px;
     bottom: 30px;
     box-shadow: 3px 3px 20px #808080 ;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.constraint-button {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: "black" !important;
+    margin-top: 40px;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+    font-family: "Avenir Next";
+}
+
+.submission {
+    position: relative;
+    top: 60px;
 }
