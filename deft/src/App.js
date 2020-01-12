@@ -6,11 +6,12 @@ import RectElement from "./components/rect_element";
 import TransformerComponent from "./components/transformer";
 import EllipseElement from "./components/ellipse_element";
 import TextElement from "./components/text_element"
+import CanvasElement from "./components/canvas_element"
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: []};
+    this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
     this.shapeCount = 0;
   }
 
@@ -25,6 +26,24 @@ export default class App extends React.Component {
       selectedShapeName: e.target.name()
     });
   };
+
+  addCanvas = (newX, newY) => {
+    this.setState({
+      canvases: [
+        ...this.state.canvases,
+        {
+          x: newX,
+          y: newY,
+          width: 264,
+          height: 544,
+          draggable: true,
+          name: "shape"+this.shapeCount,
+          fill: this.state.color
+        }
+      ]
+    });
+    this.shapeCount++;
+  }
   
   addTextbox = (newX, newY) => {
     this.setState({
@@ -40,6 +59,7 @@ export default class App extends React.Component {
         }
       ]
     });
+    this.shapeCount++;
   }
 
   addRect = (newX, newY) => {
@@ -81,7 +101,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox}></TopBar>
+        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas}></TopBar>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
@@ -125,10 +145,23 @@ export default class App extends React.Component {
                 height={eachTextbox.height}
                 draggable={eachTextbox.draggable}
                 name={eachTextbox.name}
-                text="COMPLEX TEXT\n\nAll the world's a stage, and all the men and women merely players. They have their exits and their entrances."
+                text="Default Text"
                 fontSize={18}
                 fontFamily='Calibri'
                 align='center'
+              />
+            );
+          })}
+
+          {this.state.canvases.map(eachCanvas => {
+            return (
+              <CanvasElement
+                x={eachCanvas.x}
+                y={eachCanvas.y}
+                width={eachCanvas.width}
+                height={eachCanvas.height}
+                draggable={eachCanvas.draggable}
+                fill={eachCanvas.fill}
               />
             );
           })}
