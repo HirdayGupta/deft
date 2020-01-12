@@ -12,6 +12,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
+    this.selectedElement = null;
     this.shapeCount = 0;
     this.elementDict = {};
   }
@@ -26,6 +27,13 @@ export default class App extends React.Component {
     this.setState({
       selectedShapeName: e.target.name()
     });
+
+    if (this.elementDict.hasOwnProperty(this.state.selectedShapeName)) {
+      this.selectedElement = this.elementDict[this.state.selectedShapeName];
+    } else {
+      this.selectedElement = null;
+    }
+    console.log(this.selectedElement);
   };
 
   addCanvas = (newX, newY) => {
