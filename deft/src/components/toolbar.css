@@ -9,7 +9,7 @@
     width: 30px;
     position: relative;
     top: 10px;
-    left: 50px;
+    left: 120px;
     border-radius: 5px;
     background-color: green;
 }
@@ -19,9 +19,29 @@
     width: 30px;
     position: relative;
     top: 10px;
-    left: 80px;
+    left: 140px;
     border-radius: 15px;
     background-color: green;
+}
+
+.canvas-button {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 12px;
+    right: 70px;
+    background-color: transparent;
+    border-width: 0;
+}
+
+.text-button {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 13px;
+    left: 160px;
+    background-color: transparent;
+    border-width: 0;
 }
 
 .object-bar {

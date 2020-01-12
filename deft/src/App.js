@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
 import { Stage, Layer, Rect, Text, Ellipse } from "react-konva";
 import Konva from "konva";
-import ToolBar from "./components/toolbar";
 import TopBar from "./components/topbar";
 
 export default class App extends React.Component {
