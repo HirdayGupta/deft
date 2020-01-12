@@ -11,12 +11,19 @@ export default class RectElement extends React.Component {
       y: props.y,
       width: props.width,
       height: props.height,
-      fill: props.fill
+      fill: props.fill,
+      borderRadius: props.borderRadius
     };
   }
 
   componentDidMount() {
     this.shapeRef.moveToTop();
+  }
+
+  updateBorderRadius(newBorderRadius) {
+    this.setState({
+      borderRadius: newBorderRadius
+    });
   }
 
   handleDragEnd = (e) => {
@@ -57,6 +64,7 @@ export default class RectElement extends React.Component {
         width={this.state.width}
         height={this.state.height}
         fill={this.state.fill}
+        borderRadius={this.state.borderRadius}
         name={this.props.name}
         draggable={true}
         onClick={this.handleClick}
