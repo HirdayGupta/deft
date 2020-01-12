@@ -21,6 +21,8 @@ export default class RectElement extends React.Component {
     this.bottomAnchor = new BottomAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
     this.widthAnchor = new WidthAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
     this.heightAnchor = new HeightAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
+
+    this.constraints = [];
   }
 
   componentDidMount() {
@@ -41,6 +43,22 @@ export default class RectElement extends React.Component {
     this.setState({
       fill: newColor
     });
+  }
+
+  getConstraints() {
+    return this.constraints;
+  }
+
+  addConstraint(constraint) {
+    this.constraints.push(constraint);
+  }
+
+  deleteConstraint(constraint) {
+    var index = this.constraints.indexOf(constraint);
+    if (index < 0) {
+      return;
+    }
+    this.constraints.splice(index, 1);
   }
 
   updateAnchors = () => {

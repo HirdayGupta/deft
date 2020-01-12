@@ -24,6 +24,8 @@ export default class TextElement extends React.Component {
     this.bottomAnchor = new BottomAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
     this.widthAnchor = new WidthAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
     this.heightAnchor = new HeightAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
+
+    this.constraints = [];
   }
 
   updateFillColor(newColor) {
@@ -56,6 +58,22 @@ export default class TextElement extends React.Component {
 
   getType = () => {
     return "TextElement";
+  }
+
+  getConstraints() {
+    return this.constraints;
+  }
+
+  addConstraint(constraint) {
+    this.constraints.push(constraint);
+  }
+
+  deleteConstraint(constraint) {
+    var index = this.constraints.indexOf(constraint);
+    if (index < 0) {
+      return;
+    }
+    this.constraints.splice(index, 1);
   }
 
   updateAnchors = () => {
