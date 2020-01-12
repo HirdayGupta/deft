@@ -7,6 +7,10 @@ import TransformerComponent from "./components/transformer";
 import EllipseElement from "./components/ellipse_element";
 import TextElement from "./components/text_element"
 import CanvasElement from "./components/canvas_element"
+import ConstraintsEditor from "./components/constraints_editor"
+import Constraints from "./components/constraints"
+
+import {PositionConstraint, SizeConstraint} from "./constraints"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,6 +19,107 @@ export default class App extends React.Component {
     this.selectedElement = null;
     this.shapeCount = 0;
     this.elementDict = {};
+
+    this.firstElement = null;
+    this.firstAnchor = null;
+    this.secondElement = null;
+    this.secondAnchor = null;
+    this.currentConstraint = null;
+  }
+
+  resetConstraints = () => {
+    this.firstElement = null;
+    this.firstAnchor = null;
+    this.secondElement = null;
+    this.secondAnchor = null;
+    this.currentConstraint = null;
+  }
+
+  selectFirstAnchor = (type) => {
+    this.firstElement = this.selectedElement;
+    switch(type) {
+      case "L":
+        this.firstAnchor = this.selectedElement.leftAnchor;
+      break;
+      case "R":
+        this.firstAnchor = this.selectedElement.rightAnchor;
+        break;
+      case "T":
+        this.firstAnchor = this.selectedElement.topAnchor;
+        break;
+      case "B":
+        this.firstAnchor = this.selectedElement.bottomAnchor;
+        break;
+      case "W":
+        this.firstAnchor = this.selectedElement.widthAnchor;
+        this.currentConstraint = new SizeConstraint(this.firstElement, this.firstAnchor, null, null);
+        this.constraintsEditor.updateSuggestedValue(this.currentConstraint.suggestedValue());
+        break;
+      case "H":
+        this.firstAnchor = this.selectedElement.heightAnchor;
+        this.currentConstraint = new SizeConstraint(this.firstElement, this.firstAnchor, null, null);
+        this.constraintsEditor.updateSuggestedValue(this.currentConstraint.suggestedValue());
+        break;
+      default:
+      break;
+    }
+    console.log("handled first anchor", this.firstElement, this.firstAnchor);
+  }
+
+  selectSecondAnchor = (type) => {
+    this.secondElement = this.selectedElement;
+    switch (type) {
+      case "L":
+        this.secondAnchor = this.selectedElement.leftAnchor;
+        break;
+      case "R":
+        this.secondAnchor = this.selectedElement.rightAnchor;
+        break;
+      case "T":
+        this.secondAnchor = this.selectedElement.topAnchor;
+        break;
+      case "B":
+        this.secondAnchor = this.selectedElement.bottomAnchor;
+        break;
+      case "W":
+        this.secondAnchor = this.selectedElement.widthAnchor;
+        break;
+      case "H":
+        this.secondAnchor = this.selectedElement.heightAnchor;
+        break;
+      default:
+        break;
+    }
+
+    console.log("handled second anchor", this.secondElement, this.secondAnchor);
+
+    switch (type) {
+      case "L":
+      case "R":
+      case "T":
+      case "B":
+        this.currentConstraint = new PositionConstraint(this.firstElement, this.firstAnchor, this.secondElement, this.secondAnchor);
+      break;
+      
+      case "W":
+      case "H":
+        this.currentConstraint = new SizeConstraint(this.firstElement, this.firstAnchor, this.secondElement, this.secondAnchor);
+      break;
+
+      default:
+      break;
+    }
+
+    console.log("constructed constraint: ", this.currentConstraint);
+
+    this.constraintsEditor.updateSuggestedValue(this.currentConstraint.suggestedValue());
+  }
+
+  submitConstraint = (constraintValue) => {
+    this.currentConstraint.setValue(constraintValue);
+    this.selectedElement.addConstraint(this.currentConstraint);
+    this.constraintsView.elementSelected(this.selectedElement.constraints);
+    this.resetConstraints();
   }
 
   handleClick = () => {
@@ -73,14 +178,18 @@ export default class App extends React.Component {
   handleStageClick = e => {
     this.setState({
       selectedShapeName: e.target.name()
+    }, () => {
+        if (this.elementDict.hasOwnProperty(this.state.selectedShapeName)) {
+          this.selectedElement = this.elementDict[this.state.selectedShapeName];
+          this.constraintsView.elementSelected(this.selectedElement.constraints);
+        } else {
+          this.selectedElement = null;
+        }
+        console.log(this.selectedElement);
     });
 
-    if (this.elementDict.hasOwnProperty(this.state.selectedShapeName)) {
-      this.selectedElement = this.elementDict[this.state.selectedShapeName];
-    } else {
-      this.selectedElement = null;
-    }
-    console.log(this.selectedElement);
+    
+    
   };
 
   addCanvas = (newX, newY) => {
@@ -233,6 +342,9 @@ export default class App extends React.Component {
           </TransformerComponent>
         </Layer>
       </Stage>
+        {/* constraints={this.selectedElement != null ? this.selectedElement.getConstraints() : []} */}
+      <Constraints ref={ref => this.constraintsView = ref} ></Constraints>
+      <ConstraintsEditor ref={ref => this.constraintsEditor=ref} selectFirstAnchor={this.selectFirstAnchor} selectSecondAnchor={this.selectSecondAnchor} submitConstraint={this.submitConstraint}></ConstraintsEditor>
       </React.Fragment>
     );
   }

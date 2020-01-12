@@ -1,0 +1,19 @@
+.constraints {
+    background-color: #ffffff;
+    position: absolute;
+    right: 30px;
+    top: 80px;
+    box-shadow: 3px 3px 20px #808080;
+    height: 300px;
+    width: 300px;
+    overflow: auto;
+}
+
+table
+{
+    width: 280;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
