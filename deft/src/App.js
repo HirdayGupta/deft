@@ -3,12 +3,12 @@ import { render } from "react-dom";
 import { Stage, Layer, Rect, Text, Ellipse } from "react-konva";
 import Konva from "konva";
 import ToolBar from "./components/toolbar";
-import SideBar from "./components/sidebar";
+import TopBar from "./components/topbar";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { color: "green", rects: [], ellipses: [] };
+    this.state = { color: "blue", rects: [], ellipses: [] };
   }
 
   handleClick = () => {
@@ -52,13 +52,12 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <ToolBar></ToolBar>
-      <Stage
-        width={window.innerWidth}
-        height={window.innerHeight}
-        ref="stageReference"
-      >
-        <SideBar color={this.state.color} addRect={this.addRect} addEllipse={this.addEllipse}></SideBar>
+        <TopBar addRect={this.addRect} addEllipse={this.addEllipse}></TopBar>
+        <Stage
+          width={window.innerWidth}
+          height={window.innerHeight}
+          ref="stageReference"
+        >
         <Layer>
           {this.state.rects.map(eachRect => {
             return (

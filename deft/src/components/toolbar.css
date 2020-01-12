@@ -1,0 +1,40 @@
+.bar {
+    background-color:#25008c;
+    height: 55px;
+    width: 100vw;
+}
+
+.square-button {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    border-radius: 0;
+    background-color: white;
+}
+
+.ellipse-button {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 10px;
+    left: 80px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.object-bar {
+    height: 55px;
+    width: 50vw;
+    background-color: grey;
+}
+
+.edit-bar {
+    height: 55px;
+    width: 50vw;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #25008c;
+}
