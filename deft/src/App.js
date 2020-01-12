@@ -24,6 +24,9 @@ export default class App extends React.Component {
   };
 
   changeColor = (color) => {
+    if(this.selectedElement == null) {
+      return;
+    }
     this.state.color = color;
     this.selectedElement.state.fill = color;
     this.setState({
