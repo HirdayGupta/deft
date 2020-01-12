@@ -10,11 +10,25 @@ export default class Constraints_Editor extends React.Component {
     }
 
     handleChange(id) {
-        this.setState({ ClickedButton1: id })
+        this.setState({ ClickedButton1: id });
+        this.props.selectFirstAnchor(id);
     }
 
     handleSecondChange(id) {
-        this.setState({ ClickedButton2: id })
+        this.setState({ ClickedButton2: id });
+        this.props.selectSecondAnchor(id);
+    }
+
+    updateSuggestedValue(num) {
+        var input = document.getElementById('value');
+        input.setAttribute('value', num);
+    }
+
+    didSubmitConstraint = () => {
+        var element = document.getElementById('value');
+        this.props.submitConstraint(element.value);
+        this.setState({ ClickedButton1: "", ClickedButton2: "" });
+        element.setAttribute('value','');
     }
 
     render() {
@@ -38,7 +52,7 @@ export default class Constraints_Editor extends React.Component {
                 </div>
                 <div class="submission">
                     <input type="number" id="value" name="value" size="5" />
-                    <input type="submit" id="submit" name="submit" size="5" />
+                    <input type="submit" id="submit" name="submit" size="5" onClick={this.didSubmitConstraint}/>
                 </div>
             </div>
         )
