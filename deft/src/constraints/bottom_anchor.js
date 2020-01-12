@@ -7,4 +7,8 @@ export default class BottomAnchor {
   computeValue(x,y,width,height) {
     this.value = y+height;
   }
+
+  toSwift() {
+    return "bottomAnchor";
+  }
 }

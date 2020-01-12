@@ -7,4 +7,8 @@ export default class HeightAnchor {
   computeValue(x,y,width,height) {
     this.value = height;
   }
+
+  toSwift() {
+    return "heightAnchor";
+  }
 }

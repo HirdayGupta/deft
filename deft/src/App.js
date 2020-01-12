@@ -9,6 +9,7 @@ import TextElement from "./components/text_element"
 import CanvasElement from "./components/canvas_element"
 import ConstraintsEditor from "./components/constraints_editor"
 import Constraints from "./components/constraints"
+import {SwiftTranslator} from "./translator"
 
 import {PositionConstraint, SizeConstraint} from "./constraints"
 
@@ -100,7 +101,7 @@ export default class App extends React.Component {
       case "B":
         this.currentConstraint = new PositionConstraint(this.firstElement, this.firstAnchor, this.secondElement, this.secondAnchor);
       break;
-      
+
       case "W":
       case "H":
         this.currentConstraint = new SizeConstraint(this.firstElement, this.firstAnchor, this.secondElement, this.secondAnchor);
@@ -188,8 +189,8 @@ export default class App extends React.Component {
         console.log(this.selectedElement);
     });
 
-    
-    
+
+
   };
 
   addCanvas = (newX, newY) => {
@@ -261,6 +262,12 @@ export default class App extends React.Component {
       ]
     });
     this.shapeCount++;
+  }
+
+  translateToSwift = () => {
+    var tr = new SwiftTranslator(this.elementDict);
+    var swift = tr.translate();
+    console.log(swift);
   }
 
   render() {
@@ -345,6 +352,7 @@ export default class App extends React.Component {
         {/* constraints={this.selectedElement != null ? this.selectedElement.getConstraints() : []} */}
       <Constraints ref={ref => this.constraintsView = ref} ></Constraints>
       <ConstraintsEditor ref={ref => this.constraintsEditor=ref} selectFirstAnchor={this.selectFirstAnchor} selectSecondAnchor={this.selectSecondAnchor} submitConstraint={this.submitConstraint}></ConstraintsEditor>
+      <button onClick={this.translateToSwift}>MAKE SWIFT</button>
       </React.Fragment>
     );
   }

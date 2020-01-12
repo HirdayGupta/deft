@@ -7,4 +7,8 @@ export default class RightAnchor {
   computeValue(x,y,width,height) {
     this.value = x+width;
   }
+
+  toSwift() {
+    return "trailingAnchor";
+  }
 }

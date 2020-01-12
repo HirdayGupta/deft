@@ -10,6 +10,11 @@ If not, then it is relative wrt to the targetElement.
 export default class SizeConstraint extends Constraint {
   constructor(owningElement, owningAnchor, targetElement, targetAnchor) {
     super(owningElement, owningAnchor, targetElement, targetAnchor);
+    if (this.targetElement == null) {
+      this.type = "AbsoluteSizeConstraint";
+    } else {
+      this.type = "RelativeSizeConstraint";
+    }
   }
 
   validate() {

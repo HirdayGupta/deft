@@ -3,14 +3,15 @@ import Constraint from "./constraint";
 export default class PositionConstraint extends Constraint {
   constructor(owningElement, owningAnchor, targetElement, targetAnchor) {
     super(owningElement, owningAnchor, targetElement, targetAnchor);
+    this.type = "PositionConstraint";
   }
 
   validate() {
     return true;
   }
 
-  setValue(constant) {
-    this.constant = constant;
+  setValue(value) {
+    this.value = value;
   }
 
   suggestedValue() {
@@ -18,6 +19,6 @@ export default class PositionConstraint extends Constraint {
   }
 
   toString() {
-    return this.owningElement.name + "." + this.owningAnchor.name + " = " + this.targetElement.name + "." + this.targetAnchor.name + " + " + this.constant;
+    return this.owningElement.name + "." + this.owningAnchor.name + " = " + this.targetElement.name + "." + this.targetAnchor.name + " + " + this.value;
   }
 }

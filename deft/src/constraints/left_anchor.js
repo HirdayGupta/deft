@@ -7,4 +7,8 @@ export default class LeftAnchor {
   computeValue(x,y,width,height) {
     this.value = x;
   }
+
+  toSwift() {
+    return "leadingAnchor";
+  }
 }

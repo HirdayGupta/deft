@@ -7,4 +7,8 @@ export default class TopAnchor {
   computeValue(x,y,width,height) {
     this.value = y;
   }
+
+  toSwift() {
+    return "topAnchor";
+  }
 }

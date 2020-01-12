@@ -7,4 +7,8 @@ export default class WidthAnchor {
   computeValue(x,y,width,height) {
     this.value = width;
   }
+
+  toSwift() {
+    return "widthAnchor";
+  }
 }
