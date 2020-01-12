@@ -1,4 +1,4 @@
-class Constraint {
+export default class Constraint {
   constructor(owningElement, owningAnchor, targetElement, targetAnchor) {
     this.owningElement = owningElement;
     this.owningAnchor = owningAnchor;
