@@ -7,7 +7,7 @@ export default class TopBar extends React.Component {
     render() {
         return (
             <div class="bar">
-                <ObjectBar addRect={this.props.addRect} addEllipse={this.props.addEllipse}></ObjectBar>
+                <ObjectBar addRect={this.props.addRect} addEllipse={this.props.addEllipse} addTextbox={this.props.addTextbox}></ObjectBar>
                 <EditBar></EditBar>
             </div>
         )
@@ -22,7 +22,8 @@ class ObjectBar extends React.Component {
                     onClick={() => { this.props.addRect(window.innerWidth/5,window.innerHeight/2)}}></button>
                 <button class="ellipse-button"
                     onClick={() => { this.props.addEllipse(window.innerWidth/5,window.innerHeight/2)}}></button>
-                <button class="text-button"><img src={textboxImage} height="30" width="30"/></button>
+                <button class="text-button" 
+                    onClick={() => { this.props.addTextbox(window.innerWidth/5, window.innerHeight/2)}}><img src={textboxImage} height="30" width="30"/></button>
                 <button class="canvas-button"><img src={canvasImage} height="30" width="30" /></button>
             </div>
         )

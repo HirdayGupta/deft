@@ -9,7 +9,7 @@ import EllipseElement from "./components/ellipse_element";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: ""};
+    this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: []};
     this.shapeCount = 0;
   }
 
@@ -24,6 +24,21 @@ export default class App extends React.Component {
       selectedShapeName: e.target.name()
     });
   };
+  
+  addTextbox = (newX, newY) => {
+    this.setState({
+      textboxes: [
+        ...this.state.textboxes,
+        {
+          x: newX,
+          y: newY,
+          width: 200,
+          height: 30,
+          draggable: true
+        }
+      ]
+    });
+  }
 
   addRect = (newX, newY) => {
     this.setState({
@@ -64,7 +79,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar addRect={this.addRect} addEllipse={this.addEllipse}></TopBar>
+        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox}></TopBar>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
@@ -101,6 +116,21 @@ export default class App extends React.Component {
           <TransformerComponent
             selectedShapeName={this.state.selectedShapeName}>
           </TransformerComponent>
+          {this.state.textboxes.map(eachTextbox => {
+            return (
+              <Text
+                x={eachTextbox.x}
+                y={eachTextbox.y}
+                width={eachTextbox.width}
+                height={eachTextbox.height}
+                draggable={eachTextbox.draggable}
+                text="COMPLEX TEXT\n\nAll the world's a stage, and all the men and women merely players. They have their exits and their entrances."
+                fontSize={18}
+                fontFamily='Calibri'
+                align='center'
+          />
+        );
+      })}
         </Layer>
       </Stage>
       </React.Fragment>
