@@ -8,7 +8,7 @@ export default class TopBar extends React.Component {
         return (
             <div class="bar">
                 <ObjectBar addRect={this.props.addRect} addEllipse={this.props.addEllipse} addTextbox={this.props.addTextbox} addCanvas={this.props.addCanvas}></ObjectBar>
-                <EditBar></EditBar>
+                <EditBar changeColor={this.props.changeColor}></EditBar>
             </div>
         )
     }
@@ -35,7 +35,10 @@ class EditBar extends React.Component {
     render() {
         return (
             <div class="edit-bar">
-
+                <label for="color">Color (Hex Value):</label>
+                <input type="text" id="color" name="color" required
+                    minlength="4" maxlength="8" size="10" />
+                <input type="submit" value="Submit" onClick={() => this.props.changeColor(document.getElementById('color').value)}/>
             </div>
         )
     }

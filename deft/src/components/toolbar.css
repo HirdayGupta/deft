@@ -58,3 +58,16 @@
     top: 0;
     background-color: black;
 }
+
+label {
+    display: block;
+    font: 'Fira Sans', sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+input,
+label {
+    margin: .1rem 0;
+    margin-right: 10px;
+}

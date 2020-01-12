@@ -11,7 +11,7 @@ import CanvasElement from "./components/canvas_element"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
+    this.state = { color: "#E3E3E3", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
     this.selectedElement = null;
     this.shapeCount = 0;
     this.elementDict = {};
@@ -22,6 +22,14 @@ export default class App extends React.Component {
       color: Konva.Util.getRandomColor()
     });
   };
+
+  changeColor = (color) => {
+    this.state.color = color;
+    this.selectedElement.state.fill = color;
+    this.setState({
+      selectedShapeName: this.selectedElement.name
+    });
+  }
 
   handleStageClick = e => {
     this.setState({
@@ -110,7 +118,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas}></TopBar>
+        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas} changeColor={this.changeColor}></TopBar>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
