@@ -22,6 +22,7 @@ export default class EllipseElement extends React.Component {
     this.heightAnchor = new HeightAnchor(this.state.x, this.state.y, this.state.width, this.state.height);
 
     this.constraints = [];
+    this.name = props.name;
   }
 
   updateFillColor(newColor) {
