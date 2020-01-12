@@ -5,6 +5,7 @@ import TopBar from "./components/topbar";
 import RectElement from "./components/rect_element";
 import TransformerComponent from "./components/transformer";
 import EllipseElement from "./components/ellipse_element";
+import TextElement from "./components/text_element"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,7 +35,8 @@ export default class App extends React.Component {
           y: newY,
           width: 200,
           height: 30,
-          draggable: true
+          draggable: true,
+          name: "shape"+this.shapeCount
         }
       ]
     });
@@ -113,24 +115,27 @@ export default class App extends React.Component {
               />
             );
           })}
-          <TransformerComponent
-            selectedShapeName={this.state.selectedShapeName}>
-          </TransformerComponent>
+
           {this.state.textboxes.map(eachTextbox => {
             return (
-              <Text
+              <TextElement
                 x={eachTextbox.x}
                 y={eachTextbox.y}
                 width={eachTextbox.width}
                 height={eachTextbox.height}
                 draggable={eachTextbox.draggable}
+                name={eachTextbox.name}
                 text="COMPLEX TEXT\n\nAll the world's a stage, and all the men and women merely players. They have their exits and their entrances."
                 fontSize={18}
                 fontFamily='Calibri'
                 align='center'
-          />
-        );
-      })}
+              />
+            );
+          })}
+
+          <TransformerComponent
+            selectedShapeName={this.state.selectedShapeName}>
+          </TransformerComponent>
         </Layer>
       </Stage>
       </React.Fragment>
