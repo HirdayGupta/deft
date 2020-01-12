@@ -10,7 +10,7 @@ export default class CanvasElement extends React.Component {
             y: props.y,
             width: 330,
             height: 586,
-            fill: "#E3E3E3"
+            fill: "#ffffff"
         };
     }
 

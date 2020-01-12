@@ -11,7 +11,7 @@ import CanvasElement from "./components/canvas_element"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { color: "#E3E3E3", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
+    this.state = { color: "green", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
     this.selectedElement = null;
     this.shapeCount = 0;
     this.elementDict = {};
@@ -163,6 +163,7 @@ export default class App extends React.Component {
           height={window.innerHeight}
           ref="stageReference"
           onClick={this.handleStageClick}
+          className="konva-stage"
         >
         <Layer>
           {this.state.rects.map(eachRect => {
