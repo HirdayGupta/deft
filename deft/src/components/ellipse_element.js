@@ -19,6 +19,10 @@ export default class EllipseElement extends React.Component {
     this.shapeRef.moveToTop();
   }
 
+  getType = () => {
+    return "EllipseElement";
+  }
+
   handleDragEnd = (e) => {
     this.setState({
       x: e.target.x(),

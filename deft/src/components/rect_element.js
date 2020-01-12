@@ -20,6 +20,10 @@ export default class RectElement extends React.Component {
     this.shapeRef.moveToTop();
   }
 
+  getType = () => {
+    return "RectElement";
+  }
+
   updateBorderRadius(newBorderRadius) {
     this.setState({
       borderRadius: newBorderRadius

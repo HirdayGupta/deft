@@ -19,6 +19,10 @@ export default class CanvasElement extends React.Component {
         this.shapeRef.moveToBottom();
     }
 
+    getType = () => {
+      return "CanvasElement";
+    }
+
     handleDragEnd = (e) => {
         this.setState({
             x: e.target.x(),

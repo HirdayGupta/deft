@@ -13,6 +13,7 @@ export default class App extends React.Component {
     super(props);
     this.state = { color: "blue", rects: [], ellipses: [], selectedShapeName: "", textboxes: [], canvases: []};
     this.shapeCount = 0;
+    this.elementDict = {};
   }
 
   handleClick = () => {
@@ -44,7 +45,7 @@ export default class App extends React.Component {
     });
     this.shapeCount++;
   }
-  
+
   addTextbox = (newX, newY) => {
     this.setState({
       textboxes: [
@@ -119,6 +120,7 @@ export default class App extends React.Component {
                 fill={eachRect.fill}
                 draggable={eachRect.draggable}
                 name={eachRect.name}
+                ref={ref => this.elementDict[eachRect.name] = ref}
               />
             );
           })}
@@ -132,6 +134,7 @@ export default class App extends React.Component {
                 fill={eachEllipse.fill}
                 draggable={eachEllipse.draggable}
                 name={eachEllipse.name}
+                ref={ref => this.elementDict[eachEllipse.name] = ref}
               />
             );
           })}
@@ -149,6 +152,7 @@ export default class App extends React.Component {
                 fontSize={18}
                 fontFamily='Calibri'
                 align='center'
+                ref={ref => this.elementDict[eachTextbox.name] = ref}
               />
             );
           })}
@@ -162,6 +166,7 @@ export default class App extends React.Component {
                 height={eachCanvas.height}
                 draggable={eachCanvas.draggable}
                 fill={eachCanvas.fill}
+                ref={ref => this.elementDict['canvas'] = ref}
               />
             );
           })}

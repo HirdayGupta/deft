@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text } from "react-konva";
 import Konva from "konva";
 
-export default class RectElement extends React.Component {
+export default class TextElement extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,9 +18,13 @@ export default class RectElement extends React.Component {
     };
   }
 
-    componentDidMount() {
-        this.shapeRef.moveToTop();
-    }
+  componentDidMount() {
+      this.shapeRef.moveToTop();
+  }
+
+  getType = () => {
+    return "TextElement";
+  }
 
   handleDragEnd = (e) => {
     this.setState({
