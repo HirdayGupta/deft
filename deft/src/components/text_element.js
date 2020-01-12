@@ -14,8 +14,33 @@ export default class TextElement extends React.Component {
       text: props.text,
       fontSize: props.fontSize,
       fontFamily: props.fontFamily,
-      align: props.align
+      align: props.align,
+      fill: "black"
     };
+  }
+
+  updateFillColor(newColor) {
+    this.setState({
+      fill: newColor
+    });
+  }
+
+  editText(newText) {
+    this.setState({
+      text: newText
+    });
+  }
+
+  changeFont(newFont) {
+    this.setState({
+      fontFamily: newFont
+    });
+  }
+
+  changeFontSize(newFontSize) {
+    this.setState({
+      fontSize: newFontSize
+    });
   }
 
   componentDidMount() {
@@ -63,6 +88,7 @@ export default class TextElement extends React.Component {
         ref={ref => {this.shapeRef = ref}}
         width={this.state.width}
         height={this.state.height}
+        fill={this.state.fill}
         name={this.props.name}
         draggable={true}
         onClick={this.handleClick}

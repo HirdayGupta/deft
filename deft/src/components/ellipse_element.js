@@ -15,6 +15,12 @@ export default class EllipseElement extends React.Component {
     };
   }
 
+  updateFillColor(newColor) {
+    this.setState({
+      fill: newColor
+    });
+  }
+
   componentDidMount() {
     this.shapeRef.moveToTop();
   }

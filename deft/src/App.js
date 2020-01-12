@@ -27,11 +27,47 @@ export default class App extends React.Component {
     if(this.selectedElement == null) {
       return;
     }
-    this.state.color = color;
-    this.selectedElement.state.fill = color;
-    this.setState({
-      selectedShapeName: this.selectedElement.name
-    });
+    this.selectedElement.updateFillColor(color);
+  }
+
+  editText = (text) => {
+    if (this.selectedElement == null) {
+      return;
+    }
+    if (this.selectedElement.getType() !== "TextElement") {
+      return;
+    }
+    this.selectedElement.editText(text);
+  }
+
+  changeFont = (font) => {
+    if (this.selectedElement == null) {
+      return;
+    }
+    if (this.selectedElement.getType() !== "TextElement") {
+      return;
+    }
+    this.selectedElement.changeFont(font);
+  }
+
+  changeFontSize = (fontSize) => {
+    if (this.selectedElement == null) {
+      return;
+    }
+    if (this.selectedElement.getType() !== "TextElement") {
+      return;
+    }
+    this.selectedElement.changeFontSize(fontSize);
+  }
+
+  changeBorderRadius = (borderRadius) => {
+    if (this.selectedElement == null) {
+      return;
+    }
+    if (this.selectedElement.getType() !== "RectElement") {
+      return;
+    }
+    this.selectedElement.changeBorderRadius(borderRadius);
   }
 
   handleStageClick = e => {
@@ -121,7 +157,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas} changeColor={this.changeColor}></TopBar>
+        <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas} changeColor={this.changeColor} editText={this.editText} changeFont={this.changeFont} changeFontSize={this.changeFontSize} changeBorderRadius={this.changeBorderRadius}></TopBar>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}

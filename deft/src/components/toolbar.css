@@ -52,11 +52,17 @@
 
 .edit-bar {
     height: 55px;
-    width: 50vw;
+    width: 75vw;
     position: absolute;
     right: 0;
     top: 0;
     background-color: black;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.edit-bar-property {
+    float: left;
 }
 
 label {

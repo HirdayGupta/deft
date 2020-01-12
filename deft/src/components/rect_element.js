@@ -24,9 +24,16 @@ export default class RectElement extends React.Component {
     return "RectElement";
   }
 
-  updateBorderRadius(newBorderRadius) {
+  changeBorderRadius(newBorderRadius) {
     this.setState({
-      borderRadius: newBorderRadius
+      borderRadius: parseInt(newBorderRadius)
+    });
+    console.log(this.state.borderRadius);
+  }
+
+  updateFillColor(newColor) {
+    this.setState({
+      fill: newColor
     });
   }
 
@@ -68,7 +75,7 @@ export default class RectElement extends React.Component {
         width={this.state.width}
         height={this.state.height}
         fill={this.state.fill}
-        borderRadius={this.state.borderRadius}
+        cornerRadius={this.state.borderRadius}
         name={this.props.name}
         draggable={true}
         onClick={this.handleClick}

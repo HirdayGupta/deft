@@ -8,7 +8,7 @@ export default class TopBar extends React.Component {
         return (
             <div class="bar">
                 <ObjectBar addRect={this.props.addRect} addEllipse={this.props.addEllipse} addTextbox={this.props.addTextbox} addCanvas={this.props.addCanvas}></ObjectBar>
-                <EditBar changeColor={this.props.changeColor}></EditBar>
+                <EditBar changeColor={this.props.changeColor} editText={this.props.editText} changeFont={this.props.changeFont} changeFontSize={this.props.changeFontSize} changeBorderRadius={this.props.changeBorderRadius}></EditBar>
             </div>
         )
     }
@@ -35,10 +35,32 @@ class EditBar extends React.Component {
     render() {
         return (
             <div class="edit-bar">
-                <label for="color">Color (Hex Value):</label>
-                <input type="text" id="color" name="color" required
-                    minlength="4" maxlength="8" size="10" />
-                <input type="submit" value="Submit" onClick={() => this.props.changeColor(document.getElementById('color').value)}/>
+                <div class="edit-bar-property">
+                    <label for="color">Color (Hex Value):</label>
+                    <input type="text" id="color" name="color" required
+                        minlength="4" maxlength="8" size="10" />
+                    <input type="submit" value="Submit" onClick={() => this.props.changeColor(document.getElementById('color').value)}/>
+                </div>
+                <div class="edit-bar-property">
+                    <label for="text">Text:</label>
+                    <input type="text" id="text" name="text" size="40" />
+                    <input type="submit" value="Submit" onClick={() => this.props.editText(document.getElementById('text').value)} />
+                </div>
+                <div class="edit-bar-property">
+                    <label for="text">Font:</label>
+                    <input type="text" id="font" name="font" size="20" />
+                    <input type="submit" value="Submit" onClick={() => this.props.changeFont(document.getElementById('font').value)} />
+                </div>
+                <div class="edit-bar-property">
+                    <label for="text">Size:</label>
+                    <input type="number" id="size" name="size" size="5" />
+                    <input type="submit" value="Submit" onClick={() => this.props.changeFontSize(document.getElementById('size').value)} />
+                </div>
+                <div class="edit-bar-property">
+                    <label for="text">Border Radius:</label>
+                    <input type="number" id="bradius" name="bradius" size="5" />
+                    <input type="submit" value="Submit" onClick={() => this.props.changeBorderRadius(document.getElementById('bradius').value)} />
+                </div>
             </div>
         )
     }
