@@ -15,6 +15,9 @@ export default class TransformerComponent extends React.Component {
     if (selectedNode === this.transformer.node()) {
       return;
     }
+    if (selectedShapeName == "canvas") {
+      return;
+    }
     if (selectedNode) {
       this.transformer.attachTo(selectedNode);
     } else {

@@ -93,7 +93,7 @@ export default class App extends React.Component {
           width: 264,
           height: 544,
           draggable: true,
-          name: "shape"+this.shapeCount,
+          name: "canvas",
           fill: this.state.color
         }
       ]
@@ -222,6 +222,7 @@ export default class App extends React.Component {
                 height={eachCanvas.height}
                 draggable={eachCanvas.draggable}
                 fill={eachCanvas.fill}
+                name={eachCanvas.name}
                 ref={ref => this.elementDict['canvas'] = ref}
               />
             );
