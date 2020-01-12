@@ -49,8 +49,8 @@ export default class App extends React.Component {
         {
           x: newX,
           y: newY,
-          width: 30,
-          height: 30,
+          width: 100,
+          height: 100,
           fill: this.state.color,
           draggable: true,
           name: "shape"+this.shapeCount
@@ -67,8 +67,8 @@ export default class App extends React.Component {
         {
           x: newX,
           y: newY,
-          width: 30,
-          height: 30,
+          width: 100,
+          height: 100,
           fill: this.state.color,
           draggable: true,
           name: "shape"+this.shapeCount
