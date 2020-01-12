@@ -7,6 +7,8 @@ import TransformerComponent from "./components/transformer";
 import EllipseElement from "./components/ellipse_element";
 import TextElement from "./components/text_element"
 import CanvasElement from "./components/canvas_element"
+import ConstraintsEditor from "./components/constraints_editor"
+import Constraints from "./components/constraints"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -158,6 +160,8 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <TopBar addRect={this.addRect} addEllipse={this.addEllipse} addTextbox={this.addTextbox} addCanvas={this.addCanvas} changeColor={this.changeColor} editText={this.editText} changeFont={this.changeFont} changeFontSize={this.changeFontSize} changeBorderRadius={this.changeBorderRadius}></TopBar>
+        <ConstraintsEditor></ConstraintsEditor>
+        <Constraints></Constraints>
         <Stage
           width={window.innerWidth}
           height={window.innerHeight}
