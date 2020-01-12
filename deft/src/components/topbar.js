@@ -25,7 +25,7 @@ class ObjectBar extends React.Component {
                 <button class="text-button" 
                     onClick={() => { this.props.addTextbox(window.innerWidth/5, window.innerHeight/2)}}><img src={textboxImage} height="30" width="30"/></button>
                 <button class="canvas-button" 
-                    onClick={() => { this.props.addCanvas(window.innerWidth/2-147, window.innerHeight/2-261)}}><img src={canvasImage} height="30" width="30" /></button>
+                    onClick={() => { this.props.addCanvas(window.innerWidth/2-165, window.innerHeight/2-293)}}><img src={canvasImage} height="30" width="30" /></button>
             </div>
         )
     }
