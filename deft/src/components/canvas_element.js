@@ -8,8 +8,8 @@ export default class CanvasElement extends React.Component {
         this.state = {
             x: props.x,
             y: props.y,
-            width: 294,
-            height: 522,
+            width: 330,
+            height: 586,
             fill: "#E3E3E3"
         };
     }
