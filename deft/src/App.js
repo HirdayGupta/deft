@@ -10,6 +10,7 @@ import CanvasElement from "./components/canvas_element"
 import ConstraintsEditor from "./components/constraints_editor"
 import Constraints from "./components/constraints"
 import {SwiftTranslator} from "./translator"
+import SwiftCode from "./components/swift-code"
 
 import {PositionConstraint, SizeConstraint} from "./constraints"
 
@@ -267,7 +268,7 @@ export default class App extends React.Component {
   translateToSwift = () => {
     var tr = new SwiftTranslator(this.elementDict);
     var swift = tr.translate();
-    console.log(swift);
+    return swift;
   }
 
   render() {
@@ -350,7 +351,8 @@ export default class App extends React.Component {
         </Layer>
       </Stage>
         {/* constraints={this.selectedElement != null ? this.selectedElement.getConstraints() : []} */}
-      <Constraints ref={ref => this.constraintsView = ref} ></Constraints>
+      <SwiftCode translateToSwift={this.translateToSwift}></SwiftCode>
+      <Constraints ref={ref => this.constraintsView = ref}></Constraints>
       <ConstraintsEditor ref={ref => this.constraintsEditor=ref} selectFirstAnchor={this.selectFirstAnchor} selectSecondAnchor={this.selectSecondAnchor} submitConstraint={this.submitConstraint}></ConstraintsEditor>
       <button onClick={this.translateToSwift}>MAKE SWIFT</button>
       </React.Fragment>
