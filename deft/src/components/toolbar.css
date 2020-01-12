@@ -1,5 +1,5 @@
 .bar {
-    background-color:#25008c;
+    background-color: black;
     height: 55px;
     width: 100vw;
 }
@@ -10,8 +10,8 @@
     position: relative;
     top: 10px;
     left: 50px;
-    border-radius: 0;
-    background-color: white;
+    border-radius: 5px;
+    background-color: green;
 }
 
 .ellipse-button {
@@ -21,13 +21,13 @@
     top: 10px;
     left: 80px;
     border-radius: 15px;
-    background-color: white;
+    background-color: green;
 }
 
 .object-bar {
     height: 55px;
     width: 50vw;
-    background-color: grey;
+    background-color: black;
 }
 
 .edit-bar {
@@ -36,5 +36,5 @@
     position: absolute;
     right: 0;
     top: 0;
-    background-color: #25008c;
+    background-color: black;
 }
