@@ -60,13 +60,27 @@ export default class SwiftTranslator {
           translation+= "." + constraint.owningAnchor.toSwift() + ", constant: " + constraint.value + "),\n"
 
         } else if (constraint.type == "AbsoluteSizeConstraint") {
-          if (constraint.owningAnchor.name == "Width") {
-            translation += name + ".widthAnchor.constraint(equalToConstant: " + constraint.value + "),\n";
-          } else if (constraint.owningAnchor.name == "Height") {
-            translation += name + ".heightAnchor.constraint(equalToConstant: " + constraint.value + "),\n";
+          var elementName = constraint.owningElement.name;
+          if (constraint.owningElement.getType() == "CanvasElement") {
+            elementName = "self.view";
           }
+          translation += elementName + "." + constraint.owningAnchor.toSwift() + ".constraint(equalToConstant: " + constraint.value + "),\n";
+          // if (constraint.owningAnchor.name == "Width") {
+          //   translation += constraint.owningElement.name + ".widthAnchor.constraint(equalToConstant: " + constraint.value + "),\n";
+          // } else if (constraint.owningAnchor.name == "Height") {
+          //   translation += constraint.owningElement.name + ".heightAnchor.constraint(equalToConstant: " + constraint.value + "),\n";
+          // }
         } else if (constraint.type == "RelativeSizeConstraint") {
-          // TODO
+          var owningElementName = constraint.owningElement.name;
+          if (constraint.owningElement.getType() == "CanvasElement") {
+            owningElementName = "self.view";
+          }
+          var targetElementName = constraint.targetElement.name;
+          if (constraint.targetElement.getType() == "CanvasElement") {
+            targetElementName = "self.view";
+          }
+          translation += owningElementName + "." + constraint.owningAnchor.toSwift() + ".constraint(equalTo: ";
+          translation += targetElementName + "." + constraint.targetAnchor.toSwift() + ", multiplier: " + constraint.value + "),\n";
         }
       });
 

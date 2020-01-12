@@ -268,6 +268,7 @@ export default class App extends React.Component {
   translateToSwift = () => {
     var tr = new SwiftTranslator(this.elementDict);
     var swift = tr.translate();
+    console.log(swift);
     return swift;
   }
 
