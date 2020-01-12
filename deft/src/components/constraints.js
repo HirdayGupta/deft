@@ -2,37 +2,32 @@ import React, { Component } from "react";
 import "./constraints.css"
 
 export default class Constraints extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            constraints: []
+        };
+    }
+
+    elementSelected = (constraints) => {
+        this.setState({constraints: constraints});
+    }
+
     render() {
+        // const constraints = this.props.constraints.map(item => {
+        //     return <tr>{item.toString}</tr>
+        //       })
+
         return (
             <div class="constraints">
                 <table>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
-                    <tr>LEFT CONSTRAINT 5 TO OBJECT 1</tr>
-                    <tr>HEIGHT CONSTRAINT 25</tr>
-                    <tr>RIGHT CONSTRAINT TO OBJECT 2</tr>
-                    <tr>WIDTH CONSTRAINT 36</tr>
+                    {this.state.constraints.map(constraint => {
+                        return (
+                            <tr>
+                                {constraint.toString()}
+                            </tr>
+                        )
+                    })}
                 </table>
             </div>
         )

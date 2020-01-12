@@ -118,6 +118,7 @@ export default class App extends React.Component {
   submitConstraint = (constraintValue) => {
     this.currentConstraint.setValue(constraintValue);
     this.selectedElement.addConstraint(this.currentConstraint);
+    this.constraintsView.elementSelected(this.selectedElement.constraints);
     this.resetConstraints();
   }
 
@@ -177,14 +178,18 @@ export default class App extends React.Component {
   handleStageClick = e => {
     this.setState({
       selectedShapeName: e.target.name()
+    }, () => {
+        if (this.elementDict.hasOwnProperty(this.state.selectedShapeName)) {
+          this.selectedElement = this.elementDict[this.state.selectedShapeName];
+          this.constraintsView.elementSelected(this.selectedElement.constraints);
+        } else {
+          this.selectedElement = null;
+        }
+        console.log(this.selectedElement);
     });
 
-    if (this.elementDict.hasOwnProperty(this.state.selectedShapeName)) {
-      this.selectedElement = this.elementDict[this.state.selectedShapeName];
-    } else {
-      this.selectedElement = null;
-    }
-    console.log(this.selectedElement);
+    
+    
   };
 
   addCanvas = (newX, newY) => {
@@ -336,7 +341,8 @@ export default class App extends React.Component {
           </TransformerComponent>
         </Layer>
       </Stage>
-      <Constraints></Constraints>
+        {/* constraints={this.selectedElement != null ? this.selectedElement.getConstraints() : []} */}
+      <Constraints ref={ref => this.constraintsView = ref} ></Constraints>
       <ConstraintsEditor ref={ref => this.constraintsEditor=ref} selectFirstAnchor={this.selectFirstAnchor} selectSecondAnchor={this.selectSecondAnchor} submitConstraint={this.submitConstraint}></ConstraintsEditor>
       </React.Fragment>
     );
